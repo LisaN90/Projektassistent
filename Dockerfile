@@ -13,6 +13,10 @@ COPY app app/
 
 RUN python app/server.py
 
+RUN set FLASK_APP=flaskr
+RUN flask init-db
+RUN flask RUN
+
 EXPOSE 5042
 
 CMD ["python", "app/server.py", "serve"]
