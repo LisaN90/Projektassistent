@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Arbeitspaket {{ package['id'] }} &auml;ndern {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <div class="w3-card-3 w3-margin">
+  <form method="post" class="w3-container">
+  <label for="nr">Package Number</label>
+    <input name="nr" id="nr" value="{{ request.form['nr'] or package['nr'] }}" required class="w3-input" type="text">
+    <label for="name">Name</label>
+    <input class="w3-input" type="text" name="name" id="name" value="{{ request.form['name'] or package['name'] }}" required class="w3-input" type="text">
+    <label for="bac">BAC</label>
+    <input  name="bac" id="bac" value="{{ request.form['bac'] or package['bac'] }}" class="w3-input" type="number">
+    <label for="start_date">Startdatum</label>
+    <input  name="start_date" id="start_date" value="{{ request.form['start_date'] or package['start_date'] }}" class="w3-input" type="date">
+    <label for="end_date">Enddatum</label>
+    <input  name="end_date" id="end_date" value="{{ request.form['end_date'] or package['end_date'] }}" class="w3-input" type="date">
+    <input type="submit" class="w3-btn w3-gray" value="&Auml;nderungen sichern">
+  </form>
+  <hr>
+  <form action="{{ url_for('wbs.delete_package', id=package['id']) }}" method="post">
+    <input class="w3-btn w3-gray" type="submit" value="Arbeitspaket l&ouml;schen" onclick="return confirm('Sind Sie sicher?');">
+  </form>
+  <div>
+{% endblock %}

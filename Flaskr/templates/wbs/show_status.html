@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h2>{% block title %}Statushistorie{% endblock %}</h2>
+{% endblock %}
+{% block content %}
+  <div class="w3-card-3 w3-margin">
+      <table style="width:100%">
+          <thead>
+            <tr>
+              <th>Nr.</th>
+              <th>Paketname</th>
+              <th>Ersteller</th>
+              <th>Zeitpunkt</th>
+              <th>Statustitel</th>
+              <th>Statustext</th>
+              <th>Fertigstellungsgrad (PC)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for status in statushistory %}
+            <tr>
+              <td>{{ status['nr'] }}</td>
+              <td>{{ status['name'] }}</td>
+              <td>{{ status['username'] }}</td>
+              <td>{{ status['created'] }}</td>
+              <td>{{ status['title'] }}</td>
+              <td>{{ status['statustext'] }}</td>
+              <td>{{ status['percentage'] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+{% endblock %}

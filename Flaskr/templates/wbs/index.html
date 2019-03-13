@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h2>{% block title %}Arbeitspakete{% endblock %} </h2>
+    {% if g.user %}
+    <a class="w3-btn" href="{{ url_for('wbs.create_package') }}"><i class="fas fa-plus"></i> Neues Paket hinzufügen</a>    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="w3-cloud w3-margin">
+        <table style="width:100%">
+          <thead>
+            <tr>
+              <th>Nr.</th>
+              <th>Name</th>
+              <th>BAC</th>
+              <th>Startdatum</th>
+              <th>Enddatum</th>
+              {% if g.user %}
+              <th>Paket &auml;ndern</th>
+              <th>Status anlegen</th>
+              {% endif %}
+              <th>Statushistorie</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for package in packages %}
+            <tr>
+              <td>{{ package['nr'] }}</td>
+              <td>{{ package['name'] }}</td>
+              <td>{{ package['BAC'] }}</td>
+              <td>{{ package['start_date'] }}</td>
+              <td>{{ package['end_date'] }}</td>
+              {% if g.user %}
+                <td><a class="w3-btn fas fa-edit" href="{{ url_for('wbs.update_package', id=package['id']) }}"></a></td>
+                <td><a class="w3-btn fas fa-plus" href="{{ url_for('wbs.create_status', id=package['id']) }}"></a></td>
+              {% endif %}
+                <td><a class="w3-btn fas fa-eye" href="{{ url_for('wbs.show_status', id=package['id']) }}"></a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+{% endblock %}
