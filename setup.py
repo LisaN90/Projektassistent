@@ -8,6 +8,6 @@ setup(
     zip_safe=False,
     install_requires=[
         'flask',
-        'bdist_wheel'
+        wheel,
     ],
 )
