@@ -15,6 +15,7 @@
               <th>Statustitel</th>
               <th>Statustext</th>
               <th>Fertigstellungsgrad (PC)</th>
+              <th>Risikoampel</th>
             </tr>
           </thead>
           <tbody>
@@ -27,6 +28,7 @@
               <td>{{ status['title'] }}</td>
               <td>{{ status['statustext'] }}</td>
               <td>{{ status['percentage'] }}</td>
+              <td>{{ status['ampel'] }}</td>
             </tr>
             {% endfor %}
           </tbody>

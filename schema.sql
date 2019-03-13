@@ -27,6 +27,7 @@ CREATE TABLE status (
   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   title TEXT NOT NULL,
   statustext TEXT,
+  Ampel text,
   percentage INTEGER,
   FOREIGN KEY (author_id) REFERENCES user (id),
   FOREIGN KEY (package_id) REFERENCES package (id)

@@ -124,6 +124,7 @@ def create_status(id):
         title = request.form['title']
         statustext = request.form['statustext']
         percentage = request.form['percentage']
+        ampel = request.form['ampel']
         error = None
 
         if not title:
@@ -134,9 +135,9 @@ def create_status(id):
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO status (title, statustext, percentage, author_id, package_id)'
+                'INSERT INTO status (title, statustext, percentage, ampel, author_id, package_id)'
                 ' VALUES (?, ?, ?, ?, ?)',
-                (title, statustext, percentage, g.user['id'], id)
+                (title, statustext, percentage, ampel, g.user['id'], id)
             )
             db.commit()
             return redirect(url_for('wbs.index'))
@@ -151,7 +152,7 @@ def show_status(id):
     db = get_db()
     statushistory= db.execute(
         'SELECT s.id, u.username, p.nr, p.name, s.created, s.title, '
-        '       s.statustext, s.percentage, s.package_id '
+        '       s.statustext, s.percentage, s.ampel, s.package_id '
         ' FROM status s join user u on s.author_id = u.id'
         '               join package p on s.package_id = p.id'
         ' where s.package_id = ?'
