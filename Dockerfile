@@ -9,11 +9,11 @@ RUN pip install --upgrade pip
 
 RUN pip install --no-cache-dir -r requirements.txt --upgrade
 
-COPY app app/
+COPY Flaskr Flaskr/
 
-RUN python app/server.py
+RUN python Flaskr/server.py
 
-RUN set FLASK_APP=flaskr
+RUN set FLASK_APP=Flaskr
 RUN flask init-db
 RUN flask RUN
 
