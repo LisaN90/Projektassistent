@@ -14,7 +14,6 @@ path = Path(__file__).parent
 # load the learner
 try:
     learn = load_learner(path, export_file_name)
-    return learn
 except RuntimeError as e:
     if len(e.args) > 0 and 'CPU-only machine' in e.args[0]:
         print(e)
