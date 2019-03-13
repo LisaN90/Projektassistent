@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h2>{% block title %}Neuen Status erfassen{% endblock %}</h2>
+{% endblock %}
+
+{% block content %}
+  <div class="w3-card-3 w3-margin">
+    <form method="post" class="w3-container w3-margin">
+      <label for="title">Titel</label>
+      <input name="title" id="title" value="{{ request.form['title'] }}" required class="w3-input" type="text">
+      <label for="statustext">Status</label>
+      <textarea name="statustext" id="statustext">{{ request.form['statustext'] }}</textarea>
+      <input type="submit" class="w3-btn w3-gray"  value="Analysieren">
+    </form>
+  </div>
+{% endblock %}
