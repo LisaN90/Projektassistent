@@ -3,7 +3,7 @@ import os
 from flask import Flask
 
 #from fastai import *
-#from fastai.vision import *
+#from fastai.text import *
 #from fastai import basic_train
 
 #export_file_name = 'Fertigstellungsgrad.pkl'
@@ -32,12 +32,8 @@ app.config.from_mapping(
     DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
 )
 
-if test_config is None:
     # load the instance config, if it exists, when not testing
     app.config.from_pyfile('config.py', silent=True)
-else:
-    # load the test config if passed in
-    app.config.update(test_config)
 
 # ensure the instance folder exists
 try:
