@@ -2,14 +2,14 @@ import os
 
 from flask import Flask
 
-from fastai import *
-from fastai.vision import *
-from fastai import basic_train
+#from fastai import *
+#from fastai.vision import *
+#from fastai import basic_train
 
-export_file_name = 'Fertigstellungsgrad.pkl'
+#export_file_name = 'Fertigstellungsgrad.pkl'
 
-classes = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-path = Path(__file__).parent
+#classes = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+#path = Path(__file__).parent
 
 # load the learner
 #try:
