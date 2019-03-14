@@ -12,15 +12,15 @@ classes = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
 path = Path(__file__).parent
 
 # load the learner
-try:
-    learn = load_learner(path, export_file_name)
-except RuntimeError as e:
-    if len(e.args) > 0 and 'CPU-only machine' in e.args[0]:
-        print(e)
-        message = "\n\nThis model was trained with an old version of fastai and will not work in a CPU environment.\n\nPlease update the fastai library in your training environment and export your model again.\n\nSee instructions for 'Returning to work' at https://course.fast.ai."
-        raise RuntimeError(message)
-    else:
-        raise
+#try:
+#    learn = load_learner(path, export_file_name)
+#except RuntimeError as e:
+#    if len(e.args) > 0 and 'CPU-only machine' in e.args[0]:
+#        print(e)
+#        message = "\n\nThis model was trained with an old version of fastai and will not work in a CPU environment.\n\nPlease update the fastai library in your training environment and export your model again.\n\nSee instructions for 'Returning to work' at https://course.fast.ai."
+#        raise RuntimeError(message)
+#    else:
+#        raise
 
 """Create and configure an instance of the Flask application."""
 app = Flask(__name__, instance_relative_config=True)

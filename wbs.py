@@ -125,7 +125,7 @@ def create_status(id):
         statustext = request.form['statustext']
 
         text = title + '/' + statustext
-        percentage = learn.predict(text)
+        ""percentage = learn.predict(text)
         error = None
 
         if not title:
