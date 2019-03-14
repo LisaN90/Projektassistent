@@ -20,7 +20,6 @@ def index():
         ' FROM package'
         ' ORDER BY nr ASC'
     ).fetchall()
-
     return render_template('wbs/index.html', packages=packages)
 
 
@@ -148,7 +147,6 @@ def create_status(id):
 
 @bp.route('/<int:id>/show_status')
 def show_status(id):
-    package_id = id
     """Show all the Status for one package id ascending."""
     db = get_db()
     statushistory= db.execute(
