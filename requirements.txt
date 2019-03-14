@@ -1,6 +1,7 @@
 numpy
 fastai
 flask
+Flask-Migrate
 pandas
 Gunicorn
 sqlite3

@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask
+from flask_migrate import Migrate
 
 #from fastai import *
 #from fastai.text import *
@@ -53,10 +54,6 @@ try:
     os.makedirs(app.instance_path)
 except OSError:
     pass
-## neuer Versuch
-if __name__ == '__main__':
-    db.create_all()
-    app.run()
 
 # register the database commands
 import db
