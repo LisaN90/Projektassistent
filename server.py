@@ -53,7 +53,11 @@ try:
     os.makedirs(app.instance_path)
 except OSError:
     pass
-    
+## neuer Versuch
+if __name__ == '__main__':
+    db.create_all()
+    app.run()
+
 # register the database commands
 import db
 db.init_app(app)
