@@ -4,5 +4,3 @@ flask
 Flask-Migrate
 pandas
 Gunicorn
-sqlite3
-click
