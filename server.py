@@ -6,14 +6,27 @@ from flask import Flask
 #from fastai.text import *
 #from fastai import basic_train
 
-#export_file_name = 'Fertigstellungsgrad.pkl'
+#export_file_PC = 'Fertigstellungsgrad.pkl'
+#export_file_name = 'Ampel.pkl'
 
-#classes = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+#classes_PC = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+#classes_Ampel = ['Gelb', 'Grün', 'Rot']
 #path = Path(__file__).parent
 
-# load the learner
+# load the learner Percentage Complete
 #try:
-#    learn = load_learner(path, export_file_name)
+#    learn_PC = load_learner(path, export_file_name_PC)
+#except RuntimeError as e:
+#    if len(e.args) > 0 and 'CPU-only machine' in e.args[0]:
+#        print(e)
+#        message = "\n\nThis model was trained with an old version of fastai and will not work in a CPU environment.\n\nPlease update the fastai library in your training environment and export your model again.\n\nSee instructions for 'Returning to work' at https://course.fast.ai."
+#        raise RuntimeError(message)
+#    else:
+#        raise
+
+# load the learner Ampel
+#try:
+#    learn_Ampel = load_learner(path, export_file_name_Ampel)
 #except RuntimeError as e:
 #    if len(e.args) > 0 and 'CPU-only machine' in e.args[0]:
 #        print(e)
@@ -32,8 +45,8 @@ app.config.from_mapping(
     DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
 )
 
-    # load the instance config, if it exists, when not testing
-    app.config.from_pyfile('config.py', silent=True)
+# load the instance config, if it exists, when not testing
+app.config.from_pyfile('config.py', silent=True)
 
 # ensure the instance folder exists
 try:
@@ -42,11 +55,11 @@ except OSError:
     pass
     
 # register the database commands
-from flaskr import db
+import db
 db.init_app(app)
 
 # apply the blueprints to the app
-from flaskr import auth, wbs
+import auth, wbs
 app.register_blueprint(auth.bp)
 app.register_blueprint(wbs.bp)
 

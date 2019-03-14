@@ -1,12 +1,12 @@
 import functools
 
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for, learn
+    Blueprint, flash, g, redirect, render_template, request, session, url_for, 
 )
 from werkzeug.exceptions import abort
 
-from flaskr.auth import login_required
-from flaskr.db import get_db
+from auth import login_required
+from db import get_db
 
 bp = Blueprint('wbs', __name__)
 
@@ -20,6 +20,7 @@ def index():
         ' FROM package'
         ' ORDER BY nr ASC'
     ).fetchall()
+
     return render_template('wbs/index.html', packages=packages)
 
 
@@ -36,7 +37,7 @@ def get_package(id):
     ).fetchone()
 
     if package is None:
-        abort(404, "Ein Arbeitspaket mit Nummer {0} existiert nicht.".format(nr))
+        abort(404, "Ein Arbeitspaket mit Nummer {0} existiert nicht.".format(id))
     return package
 
 @bp.route('/create_package', methods=('GET', 'POST'))
@@ -124,7 +125,8 @@ def create_status(id):
         title = request.form['title']
         statustext = request.form['statustext']
         text = title + '/' + statustext
-        """percentage = learn.predict(text)"""
+        """percentage = learn_PC.predict(text)"""
+        """Ampel = learn_Ampel.predict(text)"""
         error = None
 
         if not title:
