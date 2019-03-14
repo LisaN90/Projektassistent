@@ -123,9 +123,8 @@ def create_status(id):
     if request.method == 'POST':
         title = request.form['title']
         statustext = request.form['statustext']
-
         text = title + '/' + statustext
-        ""percentage = learn.predict(text)
+        """percentage = learn.predict(text)"""
         error = None
 
         if not title:
