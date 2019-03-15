@@ -23,7 +23,7 @@ function analyze() {
     xhr.onload = function(e) {
         if (this.readyState === 4) {
             var response = JSON.parse(e.target.responseText);
-            el('status-pc').innerHTML = `Result = ${response['result_pc']}`;
+            el('status-label').innerHTML = `Result = ${response['result_status']}`;
             el('ampel-label').innerHTML = `Result = ${response['result_ampel']}`;
         }
         el('analyze-button').innerHTML = 'Analyze';
