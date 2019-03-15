@@ -15,14 +15,6 @@
             Geben Sie Ihren Projektstatus ein und ihr Assistent berechnet für Sie den Fortschrittsgrad der Aufgabe und ob Sie als Projektleiter unterstützen müssen!
         </p>
         <div class='content'>
-            <div class='no-display'>
-                <input id='file-input'
-                       class='no-display'
-                       type='file'
-                       name='file'
-                       accept='image/*'
-                       onchange='showPicked(this)'>
-            </div>
             <div class="w3-card-3 w3-margin">
                 <form method="post" class="w3-container w3-margin">
                   <label for="title">Titel</label>
@@ -32,7 +24,7 @@
                 </form>
               </div>
             <div class='analyze'>
-                <button id='analyze-button' class='analyze-button' type='button' onclick='analyze()'>Analysieren</button>
+                <button id='analyze-button' class='w3-button' type='button' onclick='analyze()'>Analysieren</button>
             </div>
             <div class='result-label'>
                 <label id='result-label'></label>
