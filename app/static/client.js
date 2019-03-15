@@ -1,17 +1,5 @@
 var el = x => document.getElementById(x);
 
-function showPicker(inputId) { el('file-input').click(); }
-
-function showPicked(input) {
-    el('upload-label').innerHTML = input.files[0].name;
-    var reader = new FileReader();
-    reader.onload = function (e) {
-        el('image-picked').src = e.target.result;
-        el('image-picked').className = '';
-    }
-    reader.readAsDataURL(input.files[0]);
-}
-
 function analyze() {
     var title = el('title').innerText;
     var statustext = el('statustext').innerText;
@@ -26,7 +14,7 @@ function analyze() {
             el('status-label').innerHTML = `Result = ${response['result_status']}`;
             el('ampel-label').innerHTML = `Result = ${response['result_ampel']}`;
         }
-        el('analyze-button').innerHTML = 'Analyze';
+        el('analyze-button').innerHTML = 'Analysiere...';
     }
 }
 
