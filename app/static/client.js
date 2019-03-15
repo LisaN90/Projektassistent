@@ -3,10 +3,10 @@ var el = x => document.getElementById(x);
 function analyze() {
     var title = el('title').value;
     var statustext = el('statustext').value;
+    text = title + " " + statustext
     el('analyze-button').innerHTML = 'Analysiere...';
     var xhr = new XMLHttpRequest();
     var loc = window.location
-    parameters = [title , statustext]
     xhr.open('POST', `${loc.protocol}//${loc.hostname}:${loc.port}/analyze`, true);
     xhr.onerror = function() {alert (xhr.responseText);}
     xhr.onload = function(e) {
@@ -17,6 +17,6 @@ function analyze() {
         }
         el('analyze-button').innerHTML = 'Analysiere...';
     }
-    xhr.send(parameters);
+    xhr.send(text);
 }
 

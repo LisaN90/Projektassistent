@@ -68,10 +68,7 @@ def index(request):
 
 @app.route('/analyze', methods=['POST'])
 async def analyze(request):
-    data = await request.form()
-    title = data[0] #await (data['title'].read())
-    statustext = data[1] #await (data['statustext'].read())
-    text = title + ' ' + statustext
+    text = await request.form()
     prediction_ampel = learn_ampel.predict(text)
     prediction_status = learn_status.predict(text)
     return JSONResponse({'result': str(prediction_ampel)})
