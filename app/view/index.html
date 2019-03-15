@@ -1,16 +1,16 @@
 <html lang='en'>
 <head>
     <meta charset='utf-8'>
+    <link rel="shortcut icon" href="../static/favicon.ico'">
     <link rel='stylesheet' href='../static/style.css'>
     <script src='../static/client.js'></script>
 </head>
 <body>
 <div>
     <div class='center'>
-        <div class='title'>Classify Bear Images 🐻</div>
+        <h1><a href="{{ url_for('index') }}">Digitaler Projektassistent</a></h1>
         <p>
-            Use images of <strong>teddy</strong> bears, <strong>black</strong> bears, <strong>grizzly</strong> bears, or
-            all three!
+            Geben Sie Ihren Projektstatus ein und errechnen Sie den Fortschrittsgrad und ob Sie als Projektleiter etwas tun müssen!
         </p>
         <div class='content'>
             <div class='no-display'>
@@ -21,18 +21,21 @@
                        accept='image/*'
                        onchange='showPicked(this)'>
             </div>
-            <button class='choose-file-button' type='button' onclick='showPicker()'>Select Image</button>
-            <div class='upload-label'>
-                <label id='upload-label'>No file chosen</label>
-            </div>
-            <div>
-                <img id='image-picked' class='no-display' alt='Chosen Image' height='200'>
-            </div>
+            <div class="w3-card-3 w3-margin">
+                <form method="post" class="w3-container w3-margin">
+                  <label for="title">Titel</label>
+                  <input name="title" id="title" required class="w3-input" type="text">
+                  <label for="statustext">Status</label>
+                  <textarea name="statustext" id="statustext"></textarea>
+                </form>
+              </div>
             <div class='analyze'>
-                <button id='analyze-button' class='analyze-button' type='button' onclick='analyze()'>Analyze</button>
+                <button id='analyze-button' class='analyze-button' type='button' onclick='analyze()'>Analysieren</button>
             </div>
             <div class='result-label'>
                 <label id='result-label'></label>
+                <label for='result-ampel'></label>
+                <label for='result-percentage'></label>
             </div>
         </div>
     </div>
