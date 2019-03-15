@@ -6,7 +6,8 @@ import uvicorn, aiohttp, asyncio
 from io import BytesIO
 
 from fastai import *
-from fastai.vision import *
+from fastai.text import *
+from fastai.basic_train import *
 
 # export_file_url = 'https://www.dropbox.com/s/v6cuuvddq73d1e0/export.pkl?raw=1'
 export_file_url_status = 'https://www.dropbox.com/s/ruml512u0dgq6i2/Fertigstellungsgrad.pkl?dl=1'
@@ -68,11 +69,11 @@ def index(request):
 @app.route('/analyze', methods=['POST'])
 async def analyze(request):
     data = await request.form()
-    title = await (data['title'].read())
-    statustext = await (data['statustext'].read())
+    title = data[0] #await (data['title'].read())
+    statustext = data[1] #await (data['statustext'].read())
     text = title + ' ' + statustext
-    prediction_ampel = learn_ampel.predict(statustext)
-    prediction_status = learn_status.predict(statustext)
+    prediction_ampel = learn_ampel.predict(text)
+    prediction_status = learn_status.predict(text)
     return JSONResponse({'result_ampel': str(prediction_ampel)}, {'result_status': str(prediction_status)})
 
 if __name__ == '__main__':
