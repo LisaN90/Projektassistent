@@ -1,8 +1,8 @@
 var el = x => document.getElementById(x);
 
 function analyze() {
-    var title = el('title').innerText;
-    var statustext = el('statustext').innerText;
+    var title = el('title').value;
+    var statustext = el('statustext').value;
     el('analyze-button').innerHTML = 'Analysiere...';
     var xhr = new XMLHttpRequest();
     var loc = window.location
