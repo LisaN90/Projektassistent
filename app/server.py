@@ -74,7 +74,7 @@ async def analyze(request):
     text = title + ' ' + statustext
     prediction_ampel = learn_ampel.predict(text)
     prediction_status = learn_status.predict(text)
-    return JSONResponse({'result_ampel': str(prediction_ampel)}, {'result_status': str(prediction_status)})
+    return JSONResponse({'result': str(prediction_ampel)})
 
 if __name__ == '__main__':
     if 'serve' in sys.argv: uvicorn.run(app=app, host='0.0.0.0', port=5042)
