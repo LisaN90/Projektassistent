@@ -1,4 +1,4 @@
-<html lang='en'>
+<html lang='de'>
 <head>
     <meta charset='utf-8'>
     <link rel="shortcut icon" href='../static/favicon.ico'>
@@ -9,27 +9,23 @@
 </head>
 <body>
 <div>
-    <div class='center'>
+    <div id="center" class="w3-card-3 w3-container w3-margin">
         <h1>Digitaler Projektassistent</h1>
         <p>
             Geben Sie Ihren Projektstatus ein und ihr Assistent berechnet für Sie den Fortschrittsgrad der Aufgabe und ob Sie als Projektleiter unterstützen müssen!
         </p>
-        <div class='content'>
-            <div class="w3-card-3 w3-margin">
-                <form method="post" class="w3-container w3-margin">
+        <div id="content">
+            <div id="form">
+                <form method="post">
                   <label for="title">Titel</label>
                   <input name="title" id="title" required class="w3-input" type="text">
                   <label for="statustext">Status</label>
-                  <textarea name="statustext" id="statustext"></textarea>
+                  <textarea name="statustext" id="statustext">ss</textarea>
                 </form>
-              </div>
-            <div class='analyze'>
-                <button id='analyze-button' class="w3-btn w3-gray" type='button' onclick='analyze()'>Analysieren</button>
+				<button id='analyze-button' class="w3-btn w3-gray" type='button' onclick='analyze()'>Analysieren</button>
             </div>
-            <div class='result-label'>
-                <label id='result-label'></label>
-                <label for='result-ampel'>Gelb</label>
-                <label for='result-status'>0</label>
+            <div id="results" style="visibility:hidden">
+				<p><img id="traffic-light" height="42px" width="42px"/>&nbsp;Projektfortschritt:&nbsp;<span id='status'></span>%</p>
             </div>
         </div>
     </div>

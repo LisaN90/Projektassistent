@@ -1,22 +1,39 @@
-var el = x => document.getElementById(x);
+const el = x => document.getElementById(x);
 
 function analyze() {
-    var title = el('title').value;
-    var statustext = el('statustext').value;
-    text = title + " " + statustext
+    const inputTitle = el('title').value;
+    const inputText = el('statustext').value;
+    if (inputTitle.length === 0 || inputText.length === 0) {
+        alert('Titel und Status müssen gefüllt sein!');
+        return;
+    }
     el('analyze-button').innerHTML = 'Analysiere...';
-    var xhr = new XMLHttpRequest();
-    var loc = window.location
-    xhr.open('POST', `${loc.protocol}//${loc.hostname}:${loc.port}/analyze`, true);
+    const xhr = new XMLHttpRequest();
+    const loc = window.location;
+	const url = encodeURI(`${loc.protocol}//${loc.hostname}/analyze?title=${inputTitle}&text=${inputText}`);
+    xhr.open('GET', url, true);
     xhr.onerror = function() {alert (xhr.responseText);}
     xhr.onload = function(e) {
-        if (this.readyState === 4) {
-            var response = JSON.parse(e.target.responseText);
-            el('status-label').innerHTML = `Result = ${response['result_status']}`;
-            el('ampel-label').innerHTML = `Result = ${response['result_ampel']}`;
+		console.log('--this');
+		console.log(this);
+        if (this.readyState === 4 && this.status === 200) {
+            console.log('--responseText: '); console.log(e.target.responseText);
+            const response = JSON.parse(e.target.responseText);
+            el('status').innerHTML = response.computed_status;
+			switch (response.computed_trafficlight) {
+				case 'Grün':
+					el('traffic-light').src = '../static/Smiley-Green.jpg';
+					break;
+				case 'Gelb':
+					el('traffic-light').src = '../static/Smiley-Yellow.jpg';
+					break;
+				case 'Rot':
+					el('traffic-light').src = '../static/Smiley-Red.jpg';
+					break;
+			}
+			el('results').style.visibility = 'visible';
         }
-        el('analyze-button').innerHTML = 'Analysiere...';
+        el('analyze-button').innerHTML = 'Analysieren';
     }
-    xhr.send(text);
+    xhr.send();
 }
-
