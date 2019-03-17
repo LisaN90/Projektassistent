@@ -22,13 +22,13 @@ function analyze() {
             el('status').innerHTML = response.computed_status;
 			switch (response.computed_trafficlight) {
 				case 'Grün':
-					el('traffic-light').src = '../static/Smiley-Green.jpg';
+					el('traffic-light').src = '../static/Green.png';
 					break;
 				case 'Gelb':
-					el('traffic-light').src = '../static/Smiley-Yellow.jpg';
+					el('traffic-light').src = '../static/Yellow.png';
 					break;
 				case 'Rot':
-					el('traffic-light').src = '../static/Smiley-Red.jpg';
+					el('traffic-light').src = '../static/Red.png';
 					break;
 			}
 			el('results').style.visibility = 'visible';
