@@ -1,4 +1,4 @@
-const el = x => document.getElementById(x);
+const el = (x) => document.getElementById(x);
 
 document.addEventListener('DOMContentLoaded', function() {
     el('analyze-button').addEventListener('press', function(oEvent) {
@@ -11,7 +11,7 @@ function clearMessageBox() {
 }
 
 function addToMessageBox(messageType, messageText) {
-    const messageStripText = `<ui5-messagestrip type="${messageType}" style="margin-bottom: 0.5rem" hide-close-button>${messageText}</ui5-messagestrip>`;
+    const messageStripText = `<ui5-messagestrip type="${messageType}" hide-close-button>${messageText}</ui5-messagestrip>`;
     el('messagebox').innerHTML = el('messagebox').innerHTML + messageStripText;
 }
 
@@ -26,19 +26,13 @@ function analyze() {
     el('analyze-button').innerHTML = 'Analysiere...';
     const xhr = new XMLHttpRequest();
     const loc = window.location;
-    var url = '';
-    if (loc.hostname === '') { // used for local development
-        url = encodeURI(`https://projektassistent-af.onrender.com/analyze?title=${inputTitle}&text=${inputText}`);
-    } else {
-        url = encodeURI(`${loc.protocol}//${loc.hostname}/analyze?title=${inputTitle}&text=${inputText}`);
-    }
+    const url = encodeURI(`${loc.protocol}//${loc.hostname}/analyze?title=${inputTitle}&text=${inputText}`);
     xhr.open('GET', url, true);
-    xhr.onerror = function() {alert (xhr.responseText);}
+    xhr.onerror = function() {
+        alert(xhr.responseText);
+    };
     xhr.onload = function(e) {
-        console.log('--this');
-        console.log(this);
         if (this.readyState === 4 && this.status === 200) {
-            console.log('--responseText: '); console.log(e.target.responseText);
             const response = JSON.parse(e.target.responseText);
             switch (response.computed_trafficlight) {
                 case 'Grün':
@@ -54,6 +48,6 @@ function analyze() {
             addToMessageBox('Information', `Berechneter Projektfortschritt: ${response.computed_status}`);
         }
         el('analyze-button').innerHTML = 'Analysieren';
-    }
+    };
     xhr.send();
 }
