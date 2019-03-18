@@ -45,7 +45,7 @@ function analyze() {
                     addToMessageBox('Negative', 'Die Aufgabe läuft schlecht, sofort unterstützen.');
                     break;
             }
-            addToMessageBox('Information', `Berechneter Projektfortschritt: ${response.computed_status}`);
+            addToMessageBox('Information', `Berechneter Projektfortschritt: ${response.computed_status} %`);
         }
         el('analyze-button').innerHTML = 'Analysieren';
     };
