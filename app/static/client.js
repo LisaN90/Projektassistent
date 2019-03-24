@@ -18,7 +18,7 @@ function addToMessageBox(messageType, messageText) {
 function analyze() {
     const inputText = el('statustext').value;
     clearMessageBox();
-    if (inputText.length === 0) {
+    if ( inputText.length === 0) {
         addToMessageBox('Negative', 'Status muss gefüllt sein!');
         return;
     }
@@ -35,16 +35,16 @@ function analyze() {
             const response = JSON.parse(e.target.responseText);
             switch (response.computed_trafficlight) {
                 case 'Grün':
-                    addToMessageBox('Positive', 'Die Aufgabe verläuft positiv, es ist keine Unterstützung notwendig.');
+                    addToMessageBox('Positive', 'Projekt läuft positiv');
                     break;
                 case 'Gelb':
-                    addToMessageBox('Warning', 'Die Aufgabe verläuft mit Warungen, auf diese Aufgabe sollte geachtet werden.');
+                    addToMessageBox('Warning', 'Projekt läuft mit Warungen');
                     break;
                 case 'Rot':
-                    addToMessageBox('Negative', 'Die Aufgabe läuft schlecht, sofort unterstützen.');
+                    addToMessageBox('Negative', 'Projekt läuft schlecht');
                     break;
             }
-            addToMessageBox('Information', `Berechneter Projektfortschritt: ${response.computed_status} %`);
+            addToMessageBox('Information', `Berechneter Projektfortschritt: ${response.computed_status}`);
         }
         el('analyze-button').innerHTML = 'Analysieren';
     };
