@@ -1,34 +1,32 @@
-<!DOCTYPE html>
-<html lang="de">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
-        <title>Digitaler Projektassistent</title>
-        <link rel="shortcut icon" href='../static/favicon.ico'>
-        <link rel="stylesheet" type="text/css" href="../static/style.css">
-        <!-- bootstrap for modern browsers (ES6 module) -->
-        <script type="module" src="https://sap.github.io/ui5-webcomponents/resources/sap/ui/webcomponents/main/bundle.esm.js"></script>
-        <!-- bootstrap for IE11 -->
-        <script nomodule src="https://sap.github.io/ui5-webcomponents/resources/sap/ui/webcomponents/main/bundle.es5.js"></script>
-        <script src='../static/client.js'></script>
-    </head>
-    <body>  
-        <div class="content">
-            <ui5-card heading="Digitaler Projektassistent"
-                subtitle="Geben Sie Ihren Projektstatus ein und ihr Assistent berechnet für Sie den Fortschrittsgrad der Aufgabe und ob Sie als Projektleiter unterstützen müssen!">
-                <div class="card-body">
-                    <div id="messagebox"></div>
-                    <div class="form">
-                        <form method="post">
-                            <ui5-label for="title" required>Title</ui5-label>
-                            <ui5-input id="title"></ui5-input>
-                            <ui5-label for="statustext" required>Status</ui5-label>
-                            <ui5-textarea id="statustext"></ui5-textarea>
-                        </form>
-                        <ui5-button id="analyze-button" type="Emphasized" icon="sap-icon://process">Analysieren</ui5-button>
-                    </div>
-                </div>
-            </ui5-card>
+<html lang='de'>
+<head>
+    <meta charset='utf-8'>
+    <link rel="shortcut icon" href='../static/favicon.ico'>
+    <link rel='stylesheet' href='../static/style.css'>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
+    <script src='../static/client.js'></script>
+</head>
+<body>
+<div>
+    <div id="center" class="w3-card-3 w3-container w3-margin">
+        <h1>Digitaler Projektassistent</h1>
+        <p>
+            Geben Sie Ihren Projektstatus ein und ihr Assistent berechnet für Sie den Fortschrittsgrad der Aufgabe und ob Sie als Projektleiter unterstützen müssen!
+        </p>
+        <div id="content">
+            <div id="form">
+                <form method="post">
+                  <label for="statustext">Status</label>
+                  <textarea name="statustext" id="statustext"></textarea>
+                </form>
+				<button id='analyze-button' class="w3-btn w3-gray" type='button' onclick='analyze()'>Analysieren</button>
+            </div>
+            <div id="results" style="visibility:hidden">
+				<p><img id="traffic-light" height="42px" width="42px"/>&nbsp;Projektfortschritt:&nbsp;<span id='status'></span>%</p>
+            </div>
         </div>
-    </body>
+    </div>
+</div>
+</body>
 </html>

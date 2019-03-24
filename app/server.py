@@ -71,7 +71,7 @@ def index(request):
 def analyze(request):
     responses = {}
     try:
-        input_text = request.query_params['title'] + ' ' + request.query_params['text']
+        input_text = request.query_params['text']
         logging.info('input text: ' + input_text)
         responses['computed_status'] = str(learn_status.predict(input_text)[0])
         responses['computed_trafficlight'] = str(learn_traffic_light.predict(input_text)[0])

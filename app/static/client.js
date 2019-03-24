@@ -16,17 +16,16 @@ function addToMessageBox(messageType, messageText) {
 }
 
 function analyze() {
-    const inputTitle = el('title').value;
     const inputText = el('statustext').value;
     clearMessageBox();
-    if (inputTitle.length === 0 || inputText.length === 0) {
-        addToMessageBox('Negative', 'Titel und Status müssen gefüllt sein!');
+    if (inputText.length === 0) {
+        addToMessageBox('Negative', 'Status muss gefüllt sein!');
         return;
     }
     el('analyze-button').innerHTML = 'Analysiere...';
     const xhr = new XMLHttpRequest();
     const loc = window.location;
-    const url = encodeURI(`${loc.protocol}//${loc.hostname}/analyze?title=${inputTitle}&text=${inputText}`);
+    const url = encodeURI(`${loc.protocol}//${loc.hostname}/analyze?text=${inputText}`);
     xhr.open('GET', url, true);
     xhr.onerror = function() {
         alert(xhr.responseText);
