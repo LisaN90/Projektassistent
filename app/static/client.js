@@ -35,13 +35,13 @@ function analyze() {
             const response = JSON.parse(e.target.responseText);
             switch (response.computed_trafficlight) {
                 case 'Grün':
-                    addToMessageBox('Positive', 'Projekt läuft positiv');
+                    addToMessageBox('Positive', 'Alles in Ordnung, keine Unterstützung notwendig');
                     break;
                 case 'Gelb':
-                    addToMessageBox('Warning', 'Projekt läuft mit Warungen');
+                    addToMessageBox('Warning', 'Abweichungen vom Plan vorhanden, aber mit Maßnahmen kann der Plan erreicht werden. Bitte bei der Durchführung unterstützen.');
                     break;
                 case 'Rot':
-                    addToMessageBox('Negative', 'Projekt läuft schlecht');
+                    addToMessageBox('Negative', 'Abweichungen vom Plan vorhanden, der Plan kann nicht mehr erreicht werden. Sofort bei der Lösungssuche unterstützen, Maßnahmen definieren, oder den Plan anpassen!');
                     break;
             }
             addToMessageBox('Information', `Berechneter Projektfortschritt: ${response.computed_status}`);
