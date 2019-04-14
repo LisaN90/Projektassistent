@@ -14,7 +14,7 @@ from pathlib import Path
 
 export_file_url_status = 'https://www.dropbox.com/s/ruml512u0dgq6i2/Fertigstellungsgrad.pkl?dl=1'
 export_file_name_status = 'Fertigstellungsgrad.pkl'
-export_file_url_traffic_light = 'https://www.dropbox.com/s/pnln6w67dlgdsb3/ampel.pkl?dl=1'
+export_file_url_traffic_light = 'https://www.dropbox.com/s/pnln6w67dlgdsb3/Ampel.pkl?dl=1'
 export_file_name_traffic_light = 'ampel.pkl'
 
 # classes_status = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
