@@ -1,52 +1,79 @@
-const el = (x) => document.getElementById(x);
+const trafficLight = {
+  green: 'Grün',
+  yellow: 'Gelb',
+  red: 'Rot',
+};
 
-document.addEventListener('DOMContentLoaded', function() {
-    el('analyze-button').addEventListener('press', function(oEvent) {
-        analyze();
-    });
-});
+const messageType = {
+  positive: 'Positive',
+  warning: 'Warning',
+  negative: 'Negative',
+  information: 'Information',
+};
+
+const xhr = new XMLHttpRequest();
+
+function el(id) {
+  return document.getElementById(id);
+}
 
 function clearMessageBox() {
-    el('messagebox').innerHTML = '';
+  el('messagebox').innerHTML = '';
 }
 
-function addToMessageBox(messageType, messageText) {
-    const messageStripText = `<ui5-messagestrip type="${messageType}" hide-close-button>${messageText}</ui5-messagestrip>`;
-    el('messagebox').innerHTML = el('messagebox').innerHTML + messageStripText;
+function addToMessageBox(type, text) {
+  const addHtml = `<ui5-messagestrip type="${type}" hide-close-button>\
+                   ${text}</ui5-messagestrip>`;
+  el('messagebox').innerHTML = el('messagebox').innerHTML + addHtml;
 }
 
-function analyze() {
-    const inputText = el('statustext').value;
+function setAnalyzeButtonText(text) {
+  el('analyze-button').innerHTML = text;
+}
+
+xhr.onerror = function() {
+  addToMessageBox(messageType.negative, 'Netzwerkfehler');
+};
+
+xhr.onload = function(event) {
+  if (this.status !== 200) {
+    return;
+  }
+  const response = JSON.parse(event.target.responseText);
+  switch (response.trafficlight) {
+    case trafficLight.green:
+      addToMessageBox(messageType.positive, 'Alles in Ordnung, keine\
+        Unterstützung notwendig');
+      break;
+    case trafficLight.yellow:
+      addToMessageBox(messageType.warning, 'Abweichungen vom Plan vorhanden,\
+        aber mit Maßnahmen kann der Plan erreicht werden. Bitte bei der\
+        Durchführung unterstützen.');
+      break;
+    case trafficLight.red:
+      addToMessageBox(messageType.negative, 'Abweichungen vom Plan vorhanden,\
+        der Plan kann nicht mehr erreicht werden. Sofort bei der Lösungssuche\
+        unterstützen, Maßnahmen definieren, oder den Plan anpassen!');
+      break;
+  }
+  addToMessageBox(messageType.information, `Berechneter Projektfortschritt:\
+                                            ${response.status}%`);
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+  el('analyze-button').addEventListener('press', function() {
     clearMessageBox();
-    if ( inputText.length === 0) {
-        addToMessageBox('Negative', 'Status muss gefüllt sein!');
-        return;
+    const inputText = el('statustext').value;
+    if (inputText.length === 0) {
+      addToMessageBox(messageType.negative, 'Status muss gefüllt sein!');
+      return;
     }
-    el('analyze-button').innerHTML = 'Analysiere...';
-    const xhr = new XMLHttpRequest();
-    const loc = window.location;
-    const url = encodeURI(`${loc.protocol}//${loc.hostname}/analyze?text=${inputText}`);
-    xhr.open('GET', url, true);
-    xhr.onerror = function() {
-        alert(xhr.responseText);
-    };
-    xhr.onload = function(e) {
-        if (this.readyState === 4 && this.status === 200) {
-            const response = JSON.parse(e.target.responseText);
-            switch (response.computed_trafficlight) {
-                case 'Grün':
-                    addToMessageBox('Positive', 'Alles in Ordnung, keine Unterstützung notwendig');
-                    break;
-                case 'Gelb':
-                    addToMessageBox('Warning', 'Abweichungen vom Plan vorhanden, aber mit Maßnahmen kann der Plan erreicht werden. Bitte bei der Durchführung unterstützen.');
-                    break;
-                case 'Rot':
-                    addToMessageBox('Negative', 'Abweichungen vom Plan vorhanden, der Plan kann nicht mehr erreicht werden. Sofort bei der Lösungssuche unterstützen, Maßnahmen definieren, oder den Plan anpassen!');
-                    break;
-            }
-            addToMessageBox('Information', `Berechneter Projektfortschritt: ${response.computed_status}`);
-        }
-        el('analyze-button').innerHTML = 'Analysieren';
-    };
+    setAnalyzeButtonText('Analysiere...');
+    const protocol = window.location.protocol;
+    const hostname = window.location.hostname;
+    const url = `${protocol}//${hostname}/analyze?text=${inputText}`;
+    xhr.open('GET', encodeURI(url), true);
     xhr.send();
-}
+    setAnalyzeButtonText('Analysieren');
+  });
+});
