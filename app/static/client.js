@@ -56,7 +56,7 @@ xhr.onload = function(event) {
         unterstützen, Maßnahmen definieren, oder den Plan anpassen!');
       break;
   }
-  addToMessageBox(messageType.information, `Berechneter Fertigstellungsgrad:\
+  addToMessageBox(messageType.information, `Berechneter Projektfortschritt:\
                                             ${response.status}%`);
 };
 
